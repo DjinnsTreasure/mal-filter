@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 function Button(props) {
   const [isLoading, setIsLoading] = useState(false);
   const url = `https://api.jikan.moe/v4/anime`;
-  let filters = `?rating=rx`;
+  // let filters = `?rating=rx`;
+  let filters = `?`;
   let filteredURL = url + filters
   let pageNumber = 1;
 
