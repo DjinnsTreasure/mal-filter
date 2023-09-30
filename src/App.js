@@ -59,6 +59,29 @@ function App() {
             </ul>
           </div>
         )}
+        {!data ? null : (
+          <div>
+            <p>Themes:</p>
+            <ul>
+              {data.themes.length === 0 ? (
+                <li>None</li>
+              ): (data.themes.map((item, index) => (
+                <li key={index}>{item.name}</li>
+              )))}
+            </ul>
+          </div>
+        )}
+        {!data ? null : (
+          <div>
+            <p>Trailer:</p>
+            <ul>
+              {data.trailer.embed_url === null ? (
+                <p>No trailer</p>
+              ): <p>{data.trailer.embed_url}</p>
+              }
+            </ul>
+          </div>
+        )}
       </header>
     </div>
   );
