@@ -9,12 +9,14 @@ import CoverImage from "./components/CoverImage";
 import TypeFilter from "./components/Filters/TypeFilter";
 import RatingFilter from "./components/Filters/RatingFilter";
 import MinRange from "./components/Filters/MinRange";
+import MaxRange from "./components/Filters/MaxRange";
 
 function App() {
   const [data, setData] = useState(null);
   const [selectedType, setSelectedType] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
   const [selectedMinNumber, setSelectedMinNumber] = useState(''); // Initial value
+  const [selectedMaxNumber, setSelectedMaxNumber] = useState(''); // Initial value
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -25,6 +27,9 @@ function App() {
   const handleMinNumberChange = (event) => {
     setSelectedMinNumber(event.target.value);
   };
+  const handleMaxNumberChange = (event) => {
+    setSelectedMaxNumber(event.target.value);
+  };
 
   return (
     <div className="App">
@@ -32,9 +37,10 @@ function App() {
         <TypeFilter onChange={handleTypeChange} />
         <RatingFilter onChange={handleRatingChange} />
         <MinRange onChange={handleMinNumberChange}/>
+        <MaxRange onChange={handleMaxNumberChange}/>
         <Button data={data} setData={setData} responseData={data} isLoading={false} 
           selectedType={selectedType} selectedRating={selectedRating}
-          selectedMinNumber={selectedMinNumber}
+          selectedMinNumber={selectedMinNumber} selectedMaxNumber={selectedMaxNumber}
         />
         {!data ? null : <a href={data.url}>{data.title}</a>}
         {!data ? null : <p>{data.type}</p>}

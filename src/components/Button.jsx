@@ -12,6 +12,7 @@ function Button(props) {
       : `&rating=${props.selectedRating}`
     : '';
   filters += props.selectedMinNumber ? `&min_score=${props.selectedMinNumber}` : '';
+  filters += props.selectedMaxNumber ? `&max_score=${props.selectedMaxNumber}` : '';
 
   let filteredURL = url + filters
   let pageNumber = 1;
@@ -40,11 +41,16 @@ function Button(props) {
   }
 
   function getData(){
-    let fetchURL = `${filteredURL}&page=${Math.floor(Math.random() * pageNumber)}`
+    let random = Math.floor(Math.random() * pageNumber);
+    if (pageNumber === 1) {random = 1}
+    let fetchURL = `${filteredURL}&page=${random}`
+    
     fetch(fetchURL)
       .then((resp) => resp.json())
       .then((responseData) => {
-        let index = Math.floor(Math.random() * 24);
+        let length = responseData.data.length - 1
+        console.log(length)
+        let index = Math.floor(Math.random() * length);
         props.setData(responseData.data[index])
         setIsLoading(false);
       })
