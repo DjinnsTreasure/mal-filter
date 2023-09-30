@@ -4,10 +4,20 @@ function Button(props) {
   const [isLoading, setIsLoading] = useState(false);
   const url = `https://api.jikan.moe/v4/anime`;
   // let filters = `?rating=rx`;
-  let filters = `?`;
+  let filters = `?`
+  if (props.selectedType) {
+    filters += `&type=${props.selectedType}`
+  }
+  if (props.selectedRating) {
+    if (props.selectedRating === "sfw") {
+      filters += `&sfw`
+    } else {
+      filters += `&rating=${props.selectedRating}`
+    }
+  }
   let filteredURL = url + filters
   let pageNumber = 1;
-
+  console.log(filteredURL)
 
   useEffect(() => {
     console.log(props.data); // Log the data array when it changes
@@ -18,6 +28,10 @@ function Button(props) {
     fetch(filteredURL)
       .then((resp) => resp.json())
       .then((responseData) => {
+        if (responseData.pagination.items.count === 0) {
+          props.setData(null)
+          setIsLoading(false);
+        }
         pageNumber = responseData.pagination.last_visible_page;
         getData();
       })

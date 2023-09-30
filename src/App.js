@@ -6,15 +6,31 @@ import Themes from "./components/Themes";
 import AltTitles from "./components/AltTitles";
 import Genres from "./components/Genres";
 import CoverImage from "./components/CoverImage";
+import TypeFilter from "./components/TypeFilter";
+import RatingFilter from "./components/RatingFilter";
 
 function App() {
   const [data, setData] = useState(null);
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedRating, setSelectedRating] = useState('');
+
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+  const handleRatingChange = (event) => {
+    setSelectedRating(event.target.value);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <Button data={data} setData={setData} responseData={data} isLoading={false} />
+        <TypeFilter onChange={handleTypeChange} />
+        <RatingFilter onChange={handleRatingChange} />
+        <Button data={data} setData={setData} responseData={data} isLoading={false} 
+          selectedType={selectedType} selectedRating={selectedRating}
+        />
         {!data ? null : <a href={data.url}>{data.title}</a>}
+        {!data ? null : <p>{data.type}</p>}
         {!data ? null : <p>{data.rating}</p>}
         {!data ? null : ( <p> {data.status}: {data.aired.string} </p> )}
         {!data ? null : <p>{data.duration}</p>}

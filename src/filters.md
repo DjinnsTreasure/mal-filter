@@ -1,9 +1,9 @@
-type = Enum: "tv" "movie" "ova" "special" "ona" "music"
+DONE // type = Enum: "tv" "movie" "ova" "special" "ona" "music" 
 score	= number
 min_score = number
 max_score	= number
 status = "airing" "complete" "upcoming"
-rating = "g" "pg" "pg13" "r17" "r" "rx"
+DONE // rating = "g" "pg" "pg13" "r17" "r" "rx"
 
 G - All Ages
 PG - Children
@@ -12,7 +12,7 @@ R - 17+ (violence & profanity)
 R+ - Mild Nudity
 Rx - Hentai
 
-sfw = ?sfw
+DONE // sfw = ?sfw
 genres = Filter by genre(s) IDs. Can pass multiple with a comma as a delimiter. e.g 1,2,3
 genres_exclude = Exclude genre(s) IDs. Can pass multiple with a comma as a delimiter. e.g 1,2,3
 producers = Filter by producer(s) IDs. Can pass multiple with a comma as a delimiter. e.g 1,2,3
