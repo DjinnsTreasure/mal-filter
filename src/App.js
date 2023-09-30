@@ -1,6 +1,11 @@
 import "./App.css";
 import Button from "./components/Button";
 import { useState } from "react";
+import Trailer from "./components/Trailer";
+import Themes from "./components/Themes";
+import AltTitles from "./components/AltTitles";
+import Genres from "./components/Genres";
+import CoverImage from "./components/CoverImage";
 
 function App() {
   const [data, setData] = useState(null);
@@ -8,80 +13,19 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button
-          data={data}
-          setData={setData}
-          responseData={data}
-          isLoading={false}
-        />
-        <button
-          onClick={() => {
-            console.log(data.titles);
-          }}
-        >
-          View Data
-        </button>
-        {!data ? null : <p>{data.title}</p>}
+        <Button data={data} setData={setData} responseData={data} isLoading={false} />
+        {!data ? null : <a href={data.url}>{data.title}</a>}
         {!data ? null : <p>{data.rating}</p>}
-        {!data ? null : (
-          <p>
-          {data.status}: {data.aired.string}
-          </p>
-        )}
+        {!data ? null : ( <p> {data.status}: {data.aired.string} </p> )}
         {!data ? null : <p>{data.duration}</p>}
-        {!data ? null : (
-          <div>
-            <p>Genres:</p>
-            <ul>
-              {data.genres.length === 0 ? (
-                <li>None</li>
-              ): (data.genres.map((item, index) => (
-                <li key={index}>{item.name}</li>
-              )))}
-            </ul>
-          </div>
-        )}
-        {!data ? null : (
-            <img src={data.images.jpg.image_url} alt="cover"/>
-        )}
+        {!data ? null : <Genres data={data}/>}
+        {!data ? null : <CoverImage data={data} />}
         {!data ? null : <p>Rank: {data.rank}</p>}
         {!data ? null : <p>Score: {data.score}</p>}
         {!data ? null : <p>Synopsis: {data.synopsis}</p>}
-        {!data ? null : (
-          <div>
-            <p>Alt Titles:</p>
-            <ul>
-              {data.titles.length <= 1 ? (
-                <li>None</li>
-              ): (data.titles.slice(1).map((item, index) => (
-                <li key={index}>{item.type}: {item.title}</li>
-              )))}
-            </ul>
-          </div>
-        )}
-        {!data ? null : (
-          <div>
-            <p>Themes:</p>
-            <ul>
-              {data.themes.length === 0 ? (
-                <li>None</li>
-              ): (data.themes.map((item, index) => (
-                <li key={index}>{item.name}</li>
-              )))}
-            </ul>
-          </div>
-        )}
-        {!data ? null : (
-          <div>
-            <p>Trailer:</p>
-            <ul>
-              {data.trailer.embed_url === null ? (
-                <p>No trailer</p>
-              ): <p>{data.trailer.embed_url}</p>
-              }
-            </ul>
-          </div>
-        )}
+        {!data ? null : <AltTitles data={data}/>}
+        {!data ? null : <Themes data={data}/>}
+        {!data ? null : <Trailer data={data} />}
       </header>
     </div>
   );
