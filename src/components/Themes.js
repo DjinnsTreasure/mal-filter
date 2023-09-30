@@ -3,10 +3,10 @@ import React from "react";
 const Themes = ({ data }) => {
   return (
     <div>
-      <p>Themes:</p>
+      <p className="minititle">Themes:</p>
       <ul>
         {data.themes.length === 0 ? (
-          <li>None</li>
+          null
         ) : (
           data.themes.map((item, index) => <li key={index}>{item.name}</li>)
         )}

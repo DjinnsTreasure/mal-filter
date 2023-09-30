@@ -3,10 +3,10 @@ import React from "react";
 const Genres = ({ data }) => {
   return (
     <div>
-      <p>Genres:</p>
+      <p className="minititle">Genres:</p>
       <ul>
         {data.genres.length === 0 ? (
-          <li>None</li>
+          null
         ) : (
           data.genres.map((item, index) => <li key={index}>{item.name}</li>)
         )}

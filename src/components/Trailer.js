@@ -4,7 +4,7 @@ const Trailer = ({ data }) => {
   
   return (
     <div>
-      <p>Trailer:</p>
+      <p className="minititle">Trailer:</p>
       <ul>
         {data === null || data.trailer.embed_url === null ? (
           <p>No trailer found</p>

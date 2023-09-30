@@ -1,7 +1,7 @@
 DONE // type = Enum: "tv" "movie" "ova" "special" "ona" "music" 
 score	= number
 DONE // min_score = number
-max_score	= number
+DONE // max_score	= number
 status = "airing" "complete" "upcoming"
 DONE // rating = "g" "pg" "pg13" "r17" "r" "rx"
 

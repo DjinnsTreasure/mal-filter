@@ -13,10 +13,10 @@ import MaxRange from "./components/Filters/MaxRange";
 
 function App() {
   const [data, setData] = useState(null);
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedRating, setSelectedRating] = useState('');
-  const [selectedMinNumber, setSelectedMinNumber] = useState(''); // Initial value
-  const [selectedMaxNumber, setSelectedMaxNumber] = useState(''); // Initial value
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedRating, setSelectedRating] = useState("");
+  const [selectedMinNumber, setSelectedMinNumber] = useState(""); // Initial value
+  const [selectedMaxNumber, setSelectedMaxNumber] = useState(""); // Initial value
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -36,25 +36,43 @@ function App() {
       <header className="App-header">
         <TypeFilter onChange={handleTypeChange} />
         <RatingFilter onChange={handleRatingChange} />
-        <MinRange onChange={handleMinNumberChange}/>
-        <MaxRange onChange={handleMaxNumberChange}/>
-        <Button data={data} setData={setData} responseData={data} isLoading={false} 
-          selectedType={selectedType} selectedRating={selectedRating}
-          selectedMinNumber={selectedMinNumber} selectedMaxNumber={selectedMaxNumber}
+        <MinRange onChange={handleMinNumberChange} />
+        <MaxRange onChange={handleMaxNumberChange} />
+        <Button
+          data={data}
+          setData={setData}
+          responseData={data}
+          isLoading={false}
+          selectedType={selectedType}
+          selectedRating={selectedRating}
+          selectedMinNumber={selectedMinNumber}
+          selectedMaxNumber={selectedMaxNumber}
         />
-        {!data ? null : <a href={data.url}>{data.title}</a>}
-        {!data ? null : <p>{data.type}</p>}
-        {!data ? null : <p>{data.rating}</p>}
-        {!data ? null : ( <p> {data.status}: {data.aired.string} </p> )}
-        {!data ? null : <p>{data.duration}</p>}
-        {!data ? null : <Genres data={data}/>}
-        {!data ? null : <CoverImage data={data} />}
-        {!data ? null : <p>Rank: {data.rank}</p>}
-        {!data ? null : <p>Score: {data.score}</p>}
-        {!data ? null : <p>Synopsis: {data.synopsis}</p>}
-        {!data ? null : <AltTitles data={data}/>}
-        {!data ? null : <Themes data={data}/>}
-        {!data ? null : <Trailer data={data} />}
+        <div className="container">
+          {!data ? null : (
+            <div className="left-column">
+              <h1 className="title"><a href={data.url} rel="noreferrer" target="_blank">{data.title}</a></h1>
+              <CoverImage data={data} />
+              <p>Synopsis: {data.synopsis}</p>
+              <AltTitles data={data} />
+            </div>
+          )}
+          {!data ? null : (
+            <div className="right-column">
+              <p><span className="minititle">Media Type:</span> {data.type}</p>
+              <p><span className="minititle">Rating:</span> {data.rating}</p>
+              <p>
+              <span className="minititle">{data.status}:</span> {data.aired.string}
+              </p>
+              <p><span className="minititle">Duration:</span> {data.duration}</p>
+              <Genres data={data} />
+              <p><span className="minititle">Rank:</span> {data.rank}</p>
+              <p><span className="minititle">Score:</span> {data.score}</p>
+              <Themes data={data} />
+              <Trailer data={data} />
+            </div>
+          )}
+        </div>
       </header>
     </div>
   );
