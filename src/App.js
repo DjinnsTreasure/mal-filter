@@ -6,13 +6,15 @@ import Themes from "./components/Themes";
 import AltTitles from "./components/AltTitles";
 import Genres from "./components/Genres";
 import CoverImage from "./components/CoverImage";
-import TypeFilter from "./components/TypeFilter";
-import RatingFilter from "./components/RatingFilter";
+import TypeFilter from "./components/Filters/TypeFilter";
+import RatingFilter from "./components/Filters/RatingFilter";
+import MinRange from "./components/Filters/MinRange";
 
 function App() {
   const [data, setData] = useState(null);
   const [selectedType, setSelectedType] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
+  const [selectedMinNumber, setSelectedMinNumber] = useState(''); // Initial value
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -20,14 +22,19 @@ function App() {
   const handleRatingChange = (event) => {
     setSelectedRating(event.target.value);
   };
+  const handleMinNumberChange = (event) => {
+    setSelectedMinNumber(event.target.value);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <TypeFilter onChange={handleTypeChange} />
         <RatingFilter onChange={handleRatingChange} />
+        <MinRange onChange={handleMinNumberChange}/>
         <Button data={data} setData={setData} responseData={data} isLoading={false} 
           selectedType={selectedType} selectedRating={selectedRating}
+          selectedMinNumber={selectedMinNumber}
         />
         {!data ? null : <a href={data.url}>{data.title}</a>}
         {!data ? null : <p>{data.type}</p>}

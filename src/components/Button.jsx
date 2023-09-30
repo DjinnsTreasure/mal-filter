@@ -5,16 +5,14 @@ function Button(props) {
   const url = `https://api.jikan.moe/v4/anime`;
   // let filters = `?rating=rx`;
   let filters = `?`
-  if (props.selectedType) {
-    filters += `&type=${props.selectedType}`
-  }
-  if (props.selectedRating) {
-    if (props.selectedRating === "sfw") {
-      filters += `&sfw`
-    } else {
-      filters += `&rating=${props.selectedRating}`
-    }
-  }
+  filters += props.selectedType ? `&type=${props.selectedType}` : '';
+  filters += props.selectedRating
+    ? props.selectedRating === 'sfw'
+      ? `&sfw`
+      : `&rating=${props.selectedRating}`
+    : '';
+  filters += props.selectedMinNumber ? `&min_score=${props.selectedMinNumber}` : '';
+
   let filteredURL = url + filters
   let pageNumber = 1;
   console.log(filteredURL)
