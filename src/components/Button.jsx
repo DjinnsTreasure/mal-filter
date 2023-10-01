@@ -11,18 +11,19 @@ function Button(props) {
       ? `&sfw`
       : `&rating=${props.selectedRating}`
     : '';
+  filters += props.selectedGenre ? `&genres=${props.selectedGenre}` : '';
   filters += props.selectedMinNumber ? `&min_score=${props.selectedMinNumber}` : '';
   filters += props.selectedMaxNumber ? `&max_score=${props.selectedMaxNumber}` : '';
 
   let filteredURL = url + filters
   let pageNumber = 1;
-  console.log(filteredURL)
 
-  useEffect(() => {
-    console.log(props.data); // Log the data array when it changes
-  }, [props.data]);
+  // useEffect(() => {
+  //   console.log(props.data); // Log the data array when it changes
+  // }, [props.data]);
 
   function getRandom() {
+    console.log(filters);
     setIsLoading(true);
     fetch(filteredURL)
       .then((resp) => resp.json())
@@ -41,15 +42,16 @@ function Button(props) {
   }
 
   function getData(){
-    let random = Math.floor(Math.random() * pageNumber);
+    console.log(pageNumber)
+    let random = Math.floor((Math.random() * pageNumber) + 1);
     if (pageNumber === 1) {random = 1}
     let fetchURL = `${filteredURL}&page=${random}`
+    console.log(random);
     
     fetch(fetchURL)
       .then((resp) => resp.json())
       .then((responseData) => {
         let length = responseData.data.length - 1
-        console.log(length)
         let index = Math.floor(Math.random() * length);
         props.setData(responseData.data[index])
         setIsLoading(false);

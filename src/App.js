@@ -10,13 +10,15 @@ import TypeFilter from "./components/Filters/TypeFilter";
 import RatingFilter from "./components/Filters/RatingFilter";
 import MinRange from "./components/Filters/MinRange";
 import MaxRange from "./components/Filters/MaxRange";
+import GenreFilter from "./components/Filters/GenreFilter";
 
 function App() {
   const [data, setData] = useState(null);
   const [selectedType, setSelectedType] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
-  const [selectedMinNumber, setSelectedMinNumber] = useState(""); // Initial value
-  const [selectedMaxNumber, setSelectedMaxNumber] = useState(""); // Initial value
+  const [selectedMinNumber, setSelectedMinNumber] = useState(""); 
+  const [selectedMaxNumber, setSelectedMaxNumber] = useState(""); 
+  const [selectedGenre, setSelectedGenre] = useState(""); 
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -30,12 +32,16 @@ function App() {
   const handleMaxNumberChange = (event) => {
     setSelectedMaxNumber(event.target.value);
   };
+  const handleGenreChange = (event) => {
+    setSelectedGenre(event.target.value);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <TypeFilter onChange={handleTypeChange} />
         <RatingFilter onChange={handleRatingChange} />
+        <GenreFilter onChange={handleGenreChange} />
         <MinRange onChange={handleMinNumberChange} />
         <MaxRange onChange={handleMaxNumberChange} />
         <Button
@@ -47,6 +53,7 @@ function App() {
           selectedRating={selectedRating}
           selectedMinNumber={selectedMinNumber}
           selectedMaxNumber={selectedMaxNumber}
+          selectedGenre={selectedGenre}
         />
         <div className="container">
           {!data ? null : (
